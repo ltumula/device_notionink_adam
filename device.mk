@@ -27,22 +27,20 @@ endif
 
 DEVICE_PACKAGE_OVERLAYS := device/notionink/adam/overlay
 
-# uses mdpi artwork where available
-PRODUCT_AAPT_CONFIG := normal mdpi
-PRODUCT_AAPT_PREF_CONFIG := mdpi
-PRODUCT_LOCALES += mdpi
-
+PRODUCT_LOCALES += ldpi mdpi
 
 # Adam/Harmony Configs
 PRODUCT_COPY_FILES := \
     $(LOCAL_KERNEL):kernel \
     device/notionink/adam/files/init.harmony.rc:root/init.harmony.rc \
+    device/notionink/adam/files/init.harmony.usb.rc:root/init.harmony.usb.rc \
     device/notionink/adam/files/ueventd.harmony.rc:root/ueventd.harmony.rc \
     device/notionink/adam/files/nvram.txt:system/etc/wifi/nvram.txt
 
 # Modules
 PRODUCT_COPY_FILES += \
     device/notionink/adam/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
+    device/notionink/adam/modules/tun.ko:system/lib/modules/tun.ko \
     device/notionink/adam/modules/bcm4329.ko:system/lib/modules/bcm4329.ko
 
 # Bluetooth
@@ -60,6 +58,10 @@ PRODUCT_COPY_FILES += \
 # Generic
 PRODUCT_COPY_FILES += \
    device/notionink/adam/files/vold.fstab:system/etc/vold.fstab
+   
+# APNs list
+PRODUCT_COPY_FILES += \
+   device/notionink/adam/files/apns-conf.xml:system/etc/apns-conf.xml
 
 PRODUCT_PROPERTY_OVERRIDES := \
     wifi.interface=wlan0 \
@@ -107,14 +109,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.opengles.version=131072
 
-#Set default.prop properties for root + adb
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	ro.secure=0 \
-	persist.service.adb.enable=1
+	persist.sys.usb.config=mass_storage
 
 ADDITIONAL_DEFAULT_PROPERTIES += \
-	ro.secure=0 \
-	persist.service.adb.enable=1
+	ro.secure=0 
 
 PRODUCT_CHARACTERISTICS := tablet
 

@@ -1,3 +1,5 @@
+import init.harmony.usb.rc
+
 on early-init
     mount debugfs debugfs /sys/kernel/debug
 
@@ -53,6 +55,9 @@ on boot
     chown system system /sys/class/backlight/pwm-backlight/brightness
 
 # Sensor
+    chmod 666 /dev/tegra_mediaserver
+    chmod 666 /dev/tegra_dc_0
+    chmod 666 /dev/tegra_dc_1
     chmod 666 /dev/nvhost-ctrl
     chmod 666 /dev/nvhost-display
     chmod 666 /dev/nvhost-dsi
