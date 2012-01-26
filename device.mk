@@ -27,7 +27,11 @@ endif
 
 DEVICE_PACKAGE_OVERLAYS := device/notionink/adam/overlay
 
-PRODUCT_LOCALES += ldpi mdpi
+# uses mdpi artwork where available
+PRODUCT_AAPT_CONFIG := normal mdpi
+PRODUCT_AAPT_PREF_CONFIG := mdpi
+PRODUCT_LOCALES += mdpi
+
 
 # Adam/Harmony Configs
 PRODUCT_COPY_FILES := \
@@ -37,10 +41,9 @@ PRODUCT_COPY_FILES := \
     device/notionink/adam/files/ueventd.harmony.rc:root/ueventd.harmony.rc \
     device/notionink/adam/files/nvram.txt:system/etc/wifi/nvram.txt
 
-# Modules
+# Modules    device/notionink/adam/modules/tun.ko:system/lib/modules/tun.ko \
 PRODUCT_COPY_FILES += \
     device/notionink/adam/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
-    device/notionink/adam/modules/tun.ko:system/lib/modules/tun.ko \
     device/notionink/adam/modules/bcm4329.ko:system/lib/modules/bcm4329.ko
 
 # Bluetooth
@@ -109,8 +112,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.opengles.version=131072
 
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	persist.sys.usb.config=mass_storage
+#PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+#	persist.sys.usb.config=mass_storage
 
 ADDITIONAL_DEFAULT_PROPERTIES += \
 	ro.secure=0 

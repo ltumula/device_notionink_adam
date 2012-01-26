@@ -12,9 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Camera
+#
 PRODUCT_PACKAGES := \
-    Camera \
     SpareParts \
     PQiToggle \
     Development
