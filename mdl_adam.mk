@@ -19,6 +19,7 @@ $(call inherit-product-if-exists, vendor/deadcreme/deadcreme.mk)
 
 PRODUCT_PACKAGES += \
     Superuser \
+    Trebuchet \
     su
 
 PRODUCT_NAME := mdl_adam
