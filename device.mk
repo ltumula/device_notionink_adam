@@ -41,7 +41,7 @@ PRODUCT_COPY_FILES := \
     device/notionink/adam/files/ueventd.harmony.rc:root/ueventd.harmony.rc \
     device/notionink/adam/files/nvram.txt:system/etc/wifi/nvram.txt
 
-# Modules    device/notionink/adam/modules/tun.ko:system/lib/modules/tun.ko \
+# Modules
 PRODUCT_COPY_FILES += \
     device/notionink/adam/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
     device/notionink/adam/modules/bcm4329.ko:system/lib/modules/bcm4329.ko
@@ -112,8 +112,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.opengles.version=131072
 
-#PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-#	persist.sys.usb.config=mass_storage
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+	persist.sys.usb.config=mtp
 
 ADDITIONAL_DEFAULT_PROPERTIES += \
 	ro.secure=0 

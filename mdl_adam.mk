@@ -15,7 +15,7 @@
 # Inherit from ADAM device
 $(call inherit-product, device/notionink/adam/full_adam.mk)
 # Inherit from DEADCREME vendor
-$(call inherit-product-if-exists, vendor/deadcreme/deadcreme.mk)
+$(call inherit-product-if-exists, vendor/deadcreme/DEADcreme.mk)
 
 PRODUCT_PACKAGES += \
     Superuser \
@@ -23,6 +23,7 @@ PRODUCT_PACKAGES += \
     su
 
 PRODUCT_NAME := mdl_adam
+PRODUCT_BRAND := DEADcreme
 PRODUCT_DEVICE := adam
-PRODUCT_BRAND := NotionInk
-PRODUCT_MODEL := Notion Ink ADAM
+PRODUCT_MODEL := ADAM
+PRODUCT_MANUFACTURER := NotionInk
