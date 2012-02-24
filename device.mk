@@ -27,10 +27,10 @@ endif
 
 DEVICE_PACKAGE_OVERLAYS := device/notionink/adam/overlay
 
-# uses mdpi artwork where available
-PRODUCT_AAPT_CONFIG := normal mdpi
-PRODUCT_AAPT_PREF_CONFIG := mdpi
-PRODUCT_LOCALES += mdpi
+# uses ldpi artwork where available	
+PRODUCT_AAPT_CONFIG := normal ldpi mdpi
+PRODUCT_AAPT_PREF_CONFIG := ldpi	
+PRODUCT_LOCALES += en_US
 
 
 # Adam/Harmony Configs
@@ -39,12 +39,14 @@ PRODUCT_COPY_FILES := \
     device/notionink/adam/files/init.harmony.rc:root/init.harmony.rc \
     device/notionink/adam/files/init.harmony.usb.rc:root/init.harmony.usb.rc \
     device/notionink/adam/files/ueventd.harmony.rc:root/ueventd.harmony.rc \
+    device/notionink/adam/files/bcmdhd.cal:system/etc/wifi/bcmdhd.cal \
+    device/notionink/adam/files/adam_postboot.sh:system/etc/adam_postboot.sh \
     device/notionink/adam/files/nvram.txt:system/etc/wifi/nvram.txt
 
-# Modules    device/notionink/adam/modules/tun.ko:system/lib/modules/tun.ko \
+# Modules
 PRODUCT_COPY_FILES += \
     device/notionink/adam/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
-    device/notionink/adam/modules/bcm4329.ko:system/lib/modules/bcm4329.ko
+    device/notionink/adam/modules/tun.ko:system/lib/modules/tun.ko 
 
 # Bluetooth
 PRODUCT_COPY_FILES += \
@@ -110,10 +112,14 @@ PRODUCT_COPY_FILES += \
     packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml 
 
 PRODUCT_PROPERTY_OVERRIDES += \
+	debug.sf.hw=1 \
+	ro.kernel.android.checkjni=0 \
+	ro.kernel.checkjni=0 \
+	persist.adb.notify=0 \
 	ro.opengles.version=131072
 
-#PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-#	persist.sys.usb.config=mass_storage
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+	persist.sys.usb.config=mtp
 
 ADDITIONAL_DEFAULT_PROPERTIES += \
 	ro.secure=0 
@@ -128,14 +134,8 @@ PRODUCT_PACKAGES += \
 # Filesystem management tools
 PRODUCT_PACKAGES += \
 	setup_fs
-
-# for bugmailer
-ifneq ($(TARGET_BUILD_VARIANT),user)
-	PRODUCT_PACKAGES += send_bug
-	PRODUCT_COPY_FILES += \
-		system/extras/bugmailer/bugmailer.sh:system/bin/bugmailer.sh \
-		system/extras/bugmailer/send_bug:system/bin/send_bug
-endif
-
+	
+WIFI_BAND := 802_11_ABG
+$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329/device-bcm.mk)
 $(call inherit-product, frameworks/base/build/tablet-dalvik-heap.mk)
 $(call inherit-product, vendor/notionink/adam/device-vendor.mk)
