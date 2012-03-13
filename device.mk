@@ -29,7 +29,7 @@ DEVICE_PACKAGE_OVERLAYS := device/notionink/adam/overlay
 
 # uses ldpi artwork where available	
 PRODUCT_AAPT_CONFIG := normal ldpi mdpi
-PRODUCT_AAPT_PREF_CONFIG := ldpi	
+PRODUCT_AAPT_PREF_CONFIG := mdpi	
 PRODUCT_LOCALES += en_US
 
 
@@ -135,7 +135,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	setup_fs
 	
-WIFI_BAND := 802_11_ABG
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329/device-bcm.mk)
 $(call inherit-product, frameworks/base/build/tablet-dalvik-heap.mk)
 $(call inherit-product, vendor/notionink/adam/device-vendor.mk)
